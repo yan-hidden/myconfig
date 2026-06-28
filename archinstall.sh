@@ -173,7 +173,7 @@ install_i3() {
     sudo pacman -Sy
     sudo pacman -S --noconfirm xorg-server xorg-xinit xorg-setxkbmap xorg-xrandr xorg-xprop xorg-xinput xorg-xwd xdotool
     sudo pacman -S --noconfirm i3-wm i3status rofi
-    sudo pacman -S --noconfirm picom udisks2 udiskie unrar unzip ntfs-3g usbutils dosfstools cifs-utils cryptsetup polkit feh alacritty openssh git wget pavucontrol pipewire pipewire-pulse pipewire-alsa ly xdg-user-dirs playerctl ufw man-db man-pages qalculate-gtk imagemagick xclip cups cups-browsed system-config-printer emacs papers
+    sudo pacman -S --noconfirm picom udisks2 udiskie unrar unzip ntfs-3g usbutils dosfstools cifs-utils cryptsetup polkit gpicview alacritty openssh git wget pavucontrol pipewire pipewire-pulse pipewire-alsa ly xdg-user-dirs playerctl ufw man-db man-pages qalculate-gtk imagemagick xclip cups cups-browsed system-config-printer emacs papers
     sudo pacman -S --noconfirm fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-qt fcitx5-mozc
 
     sudo systemctl enable ufw
