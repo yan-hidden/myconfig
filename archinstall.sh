@@ -120,10 +120,12 @@ base_install() {
     echo "$base_device"
     sleep 4
 
-    echo "Enter root passowd:"
+    echo -e "\n================="
+    echo "Enter root password"
     passwd
 
-    echo -e "\nEnter username"
+    echo -e "\n================="
+    echo "Enter username"
     read username || exit 1
     useradd -m -g users -G wheel -s /bin/bash "$username" || exit 1
     passwd "$username"
@@ -136,7 +138,8 @@ base_install() {
     ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
     hwclock --systohc --utc
 
-    echo "Enter host name: (pc name)"
+    echo -e "\n================="
+    echo "Enter host name (PC name)"
     read hostpc || exit 1
     echo "$hostpc" > /etc/hostname
     pacman -S --noconfirm networkmanager || exit 1
