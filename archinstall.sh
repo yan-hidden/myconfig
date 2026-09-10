@@ -176,7 +176,7 @@ install_i3() {
     sudo pacman -Sy
     sudo pacman -S --noconfirm xorg-server xorg-xinit xorg-setxkbmap xorg-xrandr xorg-xprop xorg-xinput xorg-xwd xdotool
     sudo pacman -S --noconfirm i3-wm i3status rofi
-    sudo pacman -S --noconfirm picom udisks2 udiskie unrar unzip ntfs-3g usbutils dosfstools cifs-utils cryptsetup polkit gpicview alacritty openssh git wget pavucontrol pipewire pipewire-pulse pipewire-alsa ly xdg-user-dirs playerctl ufw man-db man-pages qalculate-gtk imagemagick xclip cups cups-browsed system-config-printer emacs papers
+    sudo pacman -S --noconfirm picom udisks2 udiskie unrar unzip ntfs-3g usbutils dosfstools cifs-utils cryptsetup polkit gpicview alacritty openssh git wget pavucontrol pipewire pipewire-pulse pipewire-alsa ly xdg-user-dirs playerctl ufw man-db man-pages qalculate-gtk imagemagick xclip emacs papers
     sudo pacman -S --noconfirm fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-qt fcitx5-mozc
 
     sudo systemctl enable ufw
@@ -186,77 +186,6 @@ install_i3() {
 
     sudo pacman -S --noconfirm lxappearance gtk3 gtk4 kvantum-qt5 qt5ct
     sudo pacman -S --noconfirm materia-gtk-theme adapta-gtk-theme papirus-icon-theme capitaine-cursors ttf-dejavu ttf-freefont ttf-liberation ttf-droid terminus-font noto-fonts noto-fonts-emoji ttf-ubuntu-font-family ttf-roboto ttf-roboto-mono noto-fonts-cjk
-
-    show_menu() {
-        echo "Please select one or more options (separated by spaces):"
-        echo "1) Firefox"
-        echo "2) Chromium"
-        echo "3) File manager: thunar"
-        echo "4) Steam, Spotify"
-        echo "5) Media player: VLC"
-        echo "6) Network tools: wireshark-qt traceroute nmap"
-    }
-
-    show_menu
-    local user_input
-    read -r user_input
-
-    if [ -z "$user_input" ]; then
-        echo "ERROR: no choice made"
-        exit 1
-    fi
-
-    IFS=' ' read -ra choices <<< "$user_input"
-
-    valid_choices=()
-
-    for choice in "${choices[@]}"; do
-        if [[ "$choice" =~ ^[1-6]$ ]]; then
-            valid_choices+=("$choice")
-        else
-            echo "Warnings: '$choice' - invalid choice (valid numbers are 1-6)"
-        fi
-    done
-
-    if [ ${#valid_choices[@]} -eq 0 ]; then
-        echo "ERROR: No valid selections were made"
-        exit 1
-    fi
-
-    unique_choices=($(echo "${valid_choices[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
-
-    echo ""
-    echo "Your choice:"
-
-    for choice in "${unique_choices[@]}"; do
-        case $choice in
-            1)
-                echo "  - install Firefox"
-                sudo pacman -S --noconfirm firefox
-                ;;
-            2)
-                echo "  - install Chromium"
-                sudo pacman -S --noconfirm chromium
-                ;;
-            3)
-                echo "  - install File manager: thunar."
-                sudo pacman -S --noconfirm thunar file-roller tumbler ffmpegthumbnailer thunar-archive-plugin thunar-volman
-                ;;
-            4)
-                echo " - install Steam, Spotify "
-                sudo pacman -S --noconfirm steam spotify-launcher
-                ;;
-            5)
-                echo " - install VLC"
-                sudo pacman -S --noconfirm vlc vlc-plugins-extra vlc-plugins-video-output vlc-plugin-x264 vlc-plugin-ffmpeg vlc-plugin-x265 vlc-plugin-x265
-                ;;
-            6)
-                echo "  - install Network tools: wireshark-qt traceroute nmap"
-                sudo pacman -S wireshark-qt traceroute nmap
-                sudo usermod -aG wireshark $username
-                ;;
-        esac
-    done
 }
 
 custom_config() {
