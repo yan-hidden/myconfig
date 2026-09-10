@@ -7,7 +7,7 @@ select_disk() {
     while IFS= read -r line; do
         disk_list+=("$line")
         ((i++))
-    done < <(lsblk -d -n -o NAME,TYPE,SIZE,MODEL | grep -E 'disk|raid' | grep -v "loop")
+    done < <(lsblk -n -o NAME,TYPE,SIZE,MODEL | grep -E 'disk|raid' | grep -v "loop")
 
     if [ ${#disk_list[@]} -eq 0 ]; then
         echo "Disks not found!"
