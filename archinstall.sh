@@ -160,7 +160,7 @@ base_install() {
 detect_gpu_vendor() {
     if command -v lspci &>/dev/null; then
         if lspci | grep -i "VGA\|3D\|Display" | grep -qi "nvidia"; then
-            sudo pacman -S nvidia nvidia-utils lib32-nvidia-utils nvidia-settings
+            sudo pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings
         elif lspci | grep -i "VGA\|3D\|Display" | grep -qi "amd\|radeon\|ati"; then
             sudo pacman -S --noconfirm mesa mesa-utils vulkan-radeon
         else
