@@ -77,13 +77,12 @@ partition_disk() {
     parted --script "$disk" set 1 esp on || exit 1
     parted --script "$disk" mkpart linux-swap 1025MiB 5121MiB || exit 1
     parted --script "$disk" set 2 swap on || exit 1
-    parted --script "$disk" mkpart ext4 5121MiB 40GiB || exit 1
-    parted --script "$disk" mkpart ext4 40GiB 100% || exit 1
+    parted --script "$disk" mkpart ext4 5121MiB 100% || exit 1
 
     sync && sleep 4
     partprobe "$disk" && sleep 1
 
-    if [ ! -b "${disk}1" ] || [ ! -b "${disk}2" ] || [ ! -b "${disk}3" ] || [ ! -b "${disk}4" ]; then
+    if [ ! -b "${disk}1" ] || [ ! -b "${disk}2" ] || [ ! -b "${disk}3" ]; then
         echo "ERROR: Failed to create partitions."
         exit 1
     fi
@@ -92,11 +91,8 @@ partition_disk() {
     mkswap "${disk}2" || exit 1
     swapon "${disk}2" || exit 1
     mkfs.ext4 -F "${disk}3" || exit 1
-    mkfs.ext4 -F "${disk}4" || exit 1
 
     mount "${disk}3" /mnt || exit 1
-    mkdir /mnt/home || exit 1
-    mount "${disk}4" /mnt/home || exit 1
 }
 
 base_install() {
