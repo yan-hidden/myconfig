@@ -12,3 +12,6 @@ sudo pacman -S wireshark-qt traceroute nmap
 sudo usermod -aG wireshark $username
 
 sudo pacman -S --noconfirm cups cups-browsed system-config-printer
+
+obs-studio shotcut
+sudo pacman -S v4l2loopback-dkms
